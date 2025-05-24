@@ -1,18 +1,50 @@
+// tailwind.config.ts
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
-export default {
+const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}" // 如果你有用 app router
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pixel: ["'Press Start 2P'", ...defaultTheme.fontFamily.sans],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        pacmanYellow: "#FFCC00",
+        ghostRed: "#FF0000",
+        ghostBlue: "#00FFFF",
+        ghostPink: "#FFB8FF",
+        ghostOrange: "#FF9900",
+        star: "#FFD700",
+        darkBg: "#000000",
+      },
+      animation: {
+        wiggle: "wiggle 0.3s ease-in-out infinite",
+        shoot: "shoot 0.6s ease-in-out forwards",
+      },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+        shoot: {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(-150px) scale(0.5)",
+            opacity: "0",
+          },
+        },
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
