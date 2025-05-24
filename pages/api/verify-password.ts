@@ -2,13 +2,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const inputPassword = req.body.password;
-  const adminPassword = process.env.ADMIN_DRAW_PASSWORD;
+  const { password } = req.body;
 
-  if (inputPassword === adminPassword) {
+  if (password === process.env.ADMIN_PASSWORD) {
     res.status(200).json({ success: true });
   } else {
     res.status(401).json({ error: "Unauthorized" });
   }
 }
-

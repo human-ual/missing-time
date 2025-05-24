@@ -62,34 +62,30 @@ export default function DrawTaskPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-6">
-      <h1 className="text-3xl font-bold"> Missing Time</h1>
-      <button
-        onClick={drawTask}
-        disabled={loading}
-        className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
-      >
-        {loading ? "抽取中..." : "抽一個任務吧"}
-      </button>
-      <label className="flex items-center space-x-2">
+    <div className="min-h-screen p-6 space-y-6 flex flex-col items-center justify-center">
+      <h1 className="text-3xl font-bold">抽出一個任務！</h1>
+      <label className="flex items-center gap-2">
         <input
           type="checkbox"
           checked={allowRepeat}
           onChange={(e) => setAllowRepeat(e.target.checked)}
         />
-        <span>允許重複抽取</span>
+        允許重複任務
       </label>
+      <button
+        onClick={drawTask}
+        disabled={loading}
+        className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        {loading ? "抽取中..." : "抽一個"}
+      </button>
       {task && (
-        <div className="max-w-lg w-full p-4 border rounded shadow space-y-2 bg-white">
-          <p className="text-xl font-medium">{task.content}</p>
-          <p className="text-sm italic text-gray-700">{task.message}</p>
-          <p className="text-right text-sm text-gray-500">— {task.author}</p>
+        <div className="bg-white shadow p-4 rounded max-w-md w-full text-center">
+          <p className="text-xl font-medium mb-2">{task.content}</p>
+          <p className="text-sm italic text-gray-600 mb-1">{task.message}</p>
+          <p className="text-sm text-gray-500 text-right">— {task.author}</p>
         </div>
       )}
     </div>
   );
 }
-
-
-
-
