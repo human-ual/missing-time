@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -6,8 +6,14 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+type Task = {
+  content: string;
+  message: string;
+  author: string;
+};
+
 export default function DrawTaskPage() {
-  const [task, setTask] = useState<any>(null);
+  const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(false);
   const [allowRepeat, setAllowRepeat] = useState(false);
 
@@ -27,7 +33,7 @@ export default function DrawTaskPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-6">
-      <h1 className="text-3xl font-bold"> Missing Time</h1>
+      <h1 className="text-3xl font-bold">Missing Time</h1>
       <button
         onClick={drawTask}
         disabled={loading}
