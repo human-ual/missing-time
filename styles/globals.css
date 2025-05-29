@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'Cubic 11';
   src: url('/fonts/Cubic_11.ttf') format('truetype');
@@ -11,19 +12,12 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Cubic 11', 'Press Start 2P', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @apply m-0 p-0 box-border;
   background-color: #000000;
   color: #ffffff;
+  font-family: 'Press Start 2P', sans-serif;
 }
 
-/* 中文：讓所有含 CJK 字元的元素套用 Cubic 11 */
-:lang(zh),
-:lang(zh-TW),
-:lang(zh-CN),
-[class*="zh-font"],
-[lang="zh"] {
-  font-family: 'Cubic 11', sans-serif !important;
+:lang(zh), :lang(zh-TW), :lang(zh-CN) {
+  font-family: 'Cubic 11', sans-serif;
 }
