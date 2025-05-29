@@ -10,8 +10,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-pixel m-0 p-0 box-border;
-  background-color: #000000;
-  color: #ffffff;
+@layer base {
+  body {
+    @apply m-0 p-0 box-border;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Press Start 2P', sans-serif;
+  }
+
+  :lang(zh), :lang(zh-TW), :lang(zh-CN) {
+    font-family: 'Cubic 11', sans-serif;
+  }
 }
