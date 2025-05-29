@@ -1,4 +1,3 @@
-// pages/submit.tsx
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -40,34 +39,37 @@ export default function SubmitTaskPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen space-y-6 p-6">
-      <h1 className="text-2xl font-bold">✍ 投稿一個任務</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-black text-white font-pixel">
+      <h1 className="text-2xl font-bold mb-4">✍ <span className="zh">發送一個任務</span></h1>
+
       <input
-        className="border p-2 w-full max-w-md rounded"
+        className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh"
         placeholder="任務罐子"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
       <input
-        className="border p-2 w-full max-w-md rounded"
+        className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh mt-2"
         placeholder="有想說的話嗎?（任務補充之類的，說你很想我也可以嘻嘻）"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       <input
-        className="border p-2 w-full max-w-md rounded"
+        className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh mt-2"
         placeholder="你是...?（寫大美女或天才這種真的猜不出來呦）"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
       />
+
       <button
-        className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+        className="mt-4 bg-ghostBlue text-black font-bold px-4 py-2 rounded border-2 border-white hover:scale-105 transition-transform disabled:opacity-50"
         onClick={submitTask}
         disabled={loading}
       >
-        {loading ? "投稿中..." : "送出任務"}
+        {loading ? <span className="zh">發送中...</span> : <span className="zh">送出任務</span>}
       </button>
-      {success && <p className="text-green-600">✅ 投稿成功！</p>}
+
+      {success && <p className="text-green-400 mt-3 zh">✅ 發送成功！</p>}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// pages/history.tsx
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -35,24 +34,30 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 text-gray-800">
-      <h1 className="text-3xl font-bold mb-4 text-center">已抽取的任務</h1>
+    <div className="min-h-screen p-6 bg-black text-white font-pixel">
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        <span className="zh">已抽取的任務</span>
+      </h1>
+
       <div className="space-y-4 max-w-3xl mx-auto">
         {tasks.map((task) => (
-          <div key={task.id} className="bg-white p-4 rounded shadow">
-            <p className="text-lg font-medium">{task.content}</p>
-            <p className="text-sm italic text-gray-600">{task.message}</p>
-            <div className="text-sm text-right text-gray-500">
-              <p>— {task.author}</p>
+          <div
+            key={task.id}
+            className="bg-white text-black p-4 rounded shadow-md"
+          >
+            <p className="text-lg font-medium zh">{task.content}</p>
+            <p className="text-sm italic text-gray-700 zh">{task.message}</p>
+            <div className="text-sm text-right text-gray-600">
+              <p className="zh">— {task.author}</p>
               <p>{new Date(task.drawn_at).toLocaleString()}</p>
             </div>
           </div>
         ))}
+
         {tasks.length === 0 && (
-          <p className="text-center text-gray-500">目前尚未抽取任何任務。</p>
+          <p className="text-center text-gray-400 zh">目前尚未抽取任何任務。</p>
         )}
       </div>
     </div>
   );
 }
-

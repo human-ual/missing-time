@@ -6,7 +6,6 @@
   @font-face {
     font-family: 'Cubic 11';
     src: url('/fonts/Cubic_11.ttf') format('truetype');
-    unicode-range: U+4E00-9FFF; /* 中文 */
     font-display: swap;
   }
 
@@ -21,16 +20,8 @@
     box-sizing: border-box;
   }
 
-  /* 中文範圍字元強制用 Cubic 11 */
-  body :lang(zh),
-  body :lang(zh-TW),
-  body :lang(zh-CN),
-  body *:lang(zh),
-  body *:lang(zh-TW),
-  body *:lang(zh-CN),
-  body *:lang(zh-Hant),
-  body *:lang(zh-Hans),
-  body *[lang^="zh"] {
+  /* 強制中文使用 Cubic 11：使用 Unicode 範圍選擇器配合 span 包裹中文 */
+  .zh {
     font-family: 'Cubic 11', sans-serif !important;
   }
 }

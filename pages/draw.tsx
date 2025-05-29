@@ -1,4 +1,3 @@
-// pages/draw.tsx
 import { useState } from "react";
 
 export default function DrawTaskPage() {
@@ -42,48 +41,51 @@ export default function DrawTaskPage() {
 
   if (!authorized) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6 space-y-4">
-        <h1 className="text-2xl font-bold">請輸入密碼</h1>
+      <div className="min-h-screen flex flex-col items-center justify-center p-6 space-y-4 bg-black text-white font-pixel">
+        <h1 className="text-2xl font-bold">🔐 <span className="zh">請輸入密碼</span></h1>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border px-4 py-2 rounded"
+          className="border px-4 py-2 rounded text-black"
         />
         <button
           onClick={checkPassword}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-4 py-2 bg-ghostBlue text-black rounded hover:scale-105 transition-transform border-2 border-white"
         >
-          確認
+          <span className="zh">確認</span>
         </button>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 zh">{error}</p>}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-6 space-y-6 flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold">抽出一個任務！</h1>
-      <label className="flex items-center gap-2">
+    <div className="min-h-screen p-6 space-y-6 flex flex-col items-center justify-center bg-black text-white font-pixel">
+      <h1 className="text-3xl font-bold">🎯 <span className="zh">抽出一個任務！</span></h1>
+
+      <label className="flex items-center gap-2 text-white">
         <input
           type="checkbox"
           checked={allowRepeat}
           onChange={(e) => setAllowRepeat(e.target.checked)}
         />
-        允許重複任務
+        <span className="zh">允許重複任務</span>
       </label>
+
       <button
         onClick={drawTask}
         disabled={loading}
-        className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="px-6 py-3 bg-ghostPink text-black rounded border-2 border-white hover:scale-105 transition-transform"
       >
-        {loading ? "抽取中..." : "抽一個"}
+        <span className="zh">{loading ? "抽取中..." : "抽一個"}</span>
       </button>
+
       {task && (
-        <div className="bg-white shadow p-4 rounded max-w-md w-full text-center">
-          <p className="text-xl font-medium mb-2">{task.content}</p>
-          <p className="text-sm italic text-gray-600 mb-1">{task.message}</p>
-          <p className="text-sm text-gray-500 text-right">— {task.author}</p>
+        <div className="bg-white shadow p-4 rounded max-w-md w-full text-center text-black">
+          <p className="text-xl font-medium mb-2 zh">{task.content}</p>
+          <p className="text-sm italic text-gray-600 mb-1 zh">{task.message}</p>
+          <p className="text-sm text-gray-500 text-right zh">— {task.author}</p>
         </div>
       )}
     </div>
