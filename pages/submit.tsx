@@ -50,7 +50,7 @@ export default function SubmitTaskPage() {
       />
       <input
         className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh mt-2"
-        placeholder="想說的話嗎（任務補充之類的，說你很想我也可以）"
+        placeholder="想說的話（任務補充之類的，說你很想我也可以）"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
