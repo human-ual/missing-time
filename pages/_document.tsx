@@ -1,13 +1,15 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Head from 'next/head';
 
-export default function Document() {
+export default function Layout({ children }) {
   return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+    <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      {children}
+    </>
   );
 }
