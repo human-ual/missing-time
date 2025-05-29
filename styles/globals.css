@@ -25,3 +25,9 @@
     font-family: 'Cubic 11', sans-serif !important;
   }
 }
+
+@layer utilities {
+  .font-pixel {
+    font-family: 'Press Start 2P', 'Cubic 11', sans-serif;
+  }
+}
