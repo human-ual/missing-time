@@ -1,4 +1,4 @@
-
+// tailwind.config.ts
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
@@ -6,12 +6,12 @@ const config: Config = {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}', // 若你有用 app router
   ],
   theme: {
     extend: {
       fontFamily: {
-        pixel: ['"Press Start 2P"', 'Cubic 11', ...defaultTheme.fontFamily.sans],
+        pixel: ['"Press Start 2P"', '"Cubic 11"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         pacmanYellow: '#FFCC00',
