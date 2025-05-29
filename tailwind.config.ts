@@ -6,12 +6,12 @@ const config: Config = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}" // 如果你有用 app router
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        pixel: ["'Press Start 2P'", ...defaultTheme.fontFamily.sans],
+        pixel: ['"Press Start 2P"', '"Cubic 11"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         pacmanYellow: "#FFCC00",

@@ -50,13 +50,13 @@ export default function SubmitTaskPage() {
       />
       <input
         className="border p-2 w-full max-w-md rounded"
-        placeholder="有想說的話嗎?(任務補充之類的、說你很想我也可以嘻嘻)"
+        placeholder="有想說的話嗎?（任務補充之類的，說你很想我也可以嘻嘻）"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       <input
         className="border p-2 w-full max-w-md rounded"
-        placeholder="你是...?（大美女或天才這種真的猜不出來呦）"
+        placeholder="你是...?（寫大美女或天才這種真的猜不出來呦）"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
       />

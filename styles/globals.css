@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Cubic 11';
+  src: url('/fonts/Cubic_11.ttf') format('truetype');
+  font-display: swap;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;

@@ -19,7 +19,7 @@ export default function Home() {
           href="/submit"
           className="px-4 py-3 bg-ghostPink text-darkBg rounded-none border-4 border-white shadow-lg hover:scale-105 transition-transform"
         >
-          📝 投稿任務
+          📝 發送任務
         </a>
         <a
           href="/history"
