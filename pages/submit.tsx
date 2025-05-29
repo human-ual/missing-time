@@ -40,7 +40,7 @@ export default function SubmitTaskPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-black text-white font-pixel">
-      <h1 className="text-2xl font-bold mb-4">✍ <span className="zh">發送一個任務</span></h1>
+      <h1 className="text-2xl font-bold mb-4">✍ <span className="zh">1/50</span></h1>
 
       <input
         className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh"
@@ -50,7 +50,7 @@ export default function SubmitTaskPage() {
       />
       <input
         className="border p-2 w-full max-w-md rounded bg-white text-black placeholder:text-gray-600 zh mt-2"
-        placeholder="有想說的話嗎?（任務補充之類的，說你很想我也可以）"
+        placeholder="想說的話嗎（任務補充之類的，說你很想我也可以）"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
