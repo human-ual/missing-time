@@ -11,7 +11,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        pixel: ['"Press Start 2P"', '"Cubic 11"', ...defaultTheme.fontFamily.sans],
+        // 英文用這個
+        eng: ['"Press Start 2P"', ...defaultTheme.fontFamily.sans],
+        // 中文 fallback 用這個
+        zh: ['"Cubic 11"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         pacmanYellow: "#FFCC00",
