@@ -36,7 +36,7 @@ export default function HistoryPage() {
   return (
     <div className="min-h-screen p-6 bg-black text-white font-pixel">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        <span className="zh">已抽取的任務</span>
+        <span className="zh">已經走了那麼遠啦</span>
       </h1>
 
       <div className="space-y-4 max-w-3xl mx-auto">
@@ -55,7 +55,7 @@ export default function HistoryPage() {
         ))}
 
         {tasks.length === 0 && (
-          <p className="text-center text-gray-400 zh">目前尚未抽取任何任務。</p>
+          <p className="text-center text-gray-400 zh">出發。</p>
         )}
       </div>
     </div>
