@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
 
-// ✅ 改成你自己的 Supabase 資料
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -13,14 +12,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { data, error } = await supabase
       .from("tasks")
       .select("id, content, author")
-      .eq("drawn", false);
+      .is("drawn_at", null); // ✅ 修改這一行
 
     if (error) {
-      console.error("❌ Supabase 錯誤：", error.message);
-      return res.status(500).json({ error: "資料庫錯誤" });
+      console.error("❌ Supabase 錯誤：", error);
+      return res.status(500).json({ error: "資料庫錯誤", detail: error });
     }
 
     if (!Array.isArray(data)) {
+      console.warn("⚠️ tasks 資料格式錯誤", data);
       return res.status(500).json({ error: "資料格式錯誤" });
     }
 
