@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-// 圖片檔案（請將圖檔放在 public/images/）
 const appleImages = [
   "/images/apple-normal.png",
   "/images/apple-bitten1.png",
@@ -22,10 +21,11 @@ export default function PixelCardGrid() {
   const [drawnTask, setDrawnTask] = useState<Task | null>(null);
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [allowRepeat, setAllowRepeat] = useState(false);
 
   const loadRandomTasks = async () => {
     try {
-      const res = await fetch("/api/sample-tasks");
+      const res = await fetch("/api/sample-tasks?repeat=" + allowRepeat);
       const data = await res.json();
       if (!Array.isArray(data.tasks)) throw new Error("資料格式錯誤");
       setTasks(data.tasks);
@@ -39,7 +39,7 @@ export default function PixelCardGrid() {
 
   useEffect(() => {
     loadRandomTasks();
-  }, []);
+  }, [allowRepeat]);
 
   const handleCardClick = async (index: number) => {
     if (flippedIndex !== null || loading) return;
@@ -52,19 +52,27 @@ export default function PixelCardGrid() {
 
   return (
     <div className="bg-black h-screen overflow-hidden flex flex-col items-center justify-center p-4 font-pixel text-white">
-      <h1 className="text-xl mb-6">🎴 選一張卡片抽任務</h1>
+      <h1 className="text-xl mb-4">🎴 選一張卡片抽任務</h1>
 
-      <div className={`flex gap-4 transition-all duration-700 ${flippedIndex !== null ? "justify-center" : "flex-wrap justify-center"}`}>
+      <label className="text-xs mb-4 flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={allowRepeat}
+          onChange={() => setAllowRepeat(!allowRepeat)}
+        />
+        允許重複抽到任務
+      </label>
+
+      <div className={`flex gap-4 transition-all duration-700 ${flippedIndex !== null ? "justify-center" : "flex-wrap justify-center"} items-center w-full max-w-screen-lg`}>
         {tasks.map((task, i) => (
           <div
             key={i}
             onClick={() => handleCardClick(i)}
             className={`transition-all duration-500 relative border-4 border-white bg-black shadow-lg cursor-pointer
               ${flippedIndex !== null && flippedIndex !== i ? "opacity-0 w-0 h-0 overflow-hidden" : "hover:scale-105"}
-              ${flippedIndex === i ? "w-[90vw] h-[70vh] scale-100 z-10" : "w-40 h-56"}
+              ${flippedIndex === i ? "w-[80vw] h-[65vh] scale-100 z-10" : "w-44 h-60"}
             `}
           >
-            {/* 卡片內容 */}
             {flippedIndex === i ? (
               <div className="w-full h-full flex flex-col items-center justify-center p-6 text-sm text-center overflow-y-auto">
                 <img
