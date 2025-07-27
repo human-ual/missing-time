@@ -1,12 +1,13 @@
 // tailwind.config.ts
+
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}', // 若你有用 app router
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
@@ -38,7 +39,7 @@ const config: Config = {
           },
           '100%': {
             transform: 'translateY(-150px) scale(0.5)',
-            opacity: '0',
+            opacity: '0',      
           },
         },
       },

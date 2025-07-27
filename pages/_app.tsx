@@ -1,3 +1,5 @@
+// pages/_app.tsx
+import '@fontsource/press-start-2p';         
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
