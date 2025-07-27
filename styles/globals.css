@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ✅ 正確位置：所有 @import 要放在檔案最上面 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 如果你也有安裝這個 NPM 套件再打開這行（可選擇其一） */
+/* @import "@fontsource/press-start-2p"; */
+
 @layer base {
   @font-face {
     font-family: 'Cubic 11';
     src: url('/fonts/Cubic_11.ttf') format('truetype');
     font-display: swap;
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
   body {
     font-family: 'Press Start 2P', sans-serif;
@@ -35,9 +39,9 @@
   }
 
   .shadow-pixel {
-  box-shadow:
-    0 0 0 2px #000,
-    4px 4px 0 0 #000;
+    box-shadow:
+      0 0 0 2px #000,
+      4px 4px 0 0 #000;
   }
 
   .transform-style-preserve-3d {
