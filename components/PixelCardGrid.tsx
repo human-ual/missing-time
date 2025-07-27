@@ -13,13 +13,22 @@ export default function PixelCardGrid() {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // 🚀 頁面載入時預先從 API 拿出 6 筆任務作為選項
   const loadRandomTasks = async () => {
-    const res = await fetch("/api/sample-tasks"); // 你需要建立這個 API
-    const data = await res.json();
-    setTasks(data.tasks); // 6 筆隨機任務
-    setDrawnTask(null);
-    setFlippedIndex(null);
+    try {
+      const res = await fetch("/api/sample-tasks");
+      const data = await res.json();
+      if (Array.isArray(data.tasks)) {
+        setTasks(data.tasks);
+      } else {
+        console.error("⚠️ tasks 資料格式錯誤", data);
+        setTasks([]); // 安全預設
+      }
+      setDrawnTask(null);
+      setFlippedIndex(null);
+    } catch (err) {
+      console.error("❌ 無法載入任務", err);
+      setTasks([]);
+    }
   };
 
   useEffect(() => {
@@ -30,10 +39,8 @@ export default function PixelCardGrid() {
     if (flippedIndex !== null || loading) return;
     setFlippedIndex(index);
     setLoading(true);
-
-    // 模擬抽出，實際上只是顯示第 index 張任務
     const task = tasks[index];
-    await new Promise((res) => setTimeout(res, 600)); // 模擬延遲動畫
+    await new Promise((res) => setTimeout(res, 600));
     setDrawnTask(task);
     setLoading(false);
   };
@@ -41,40 +48,41 @@ export default function PixelCardGrid() {
   return (
     <div className="flex flex-col items-center space-y-6">
       <div className="grid grid-cols-3 gap-4">
-        {tasks.map((task, i) => (
-          <div
-            key={i}
-            className={`w-36 h-52 cursor-pointer transition-transform transform perspective-1000
-              ${flippedIndex !== null && flippedIndex !== i ? "opacity-30 pointer-events-none" : ""}
-              ${flippedIndex === null ? "hover:scale-105 animate-wiggle" : ""}
-            `}
-            onClick={() => handleCardClick(i)}
-          >
+        {Array.isArray(tasks) &&
+          tasks.map((task, i) => (
             <div
-              className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d"
-              style={{
-                transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)",
-              }}
+              key={i}
+              className={`w-36 h-52 cursor-pointer transition-transform transform perspective-1000
+                ${flippedIndex !== null && flippedIndex !== i ? "opacity-30 pointer-events-none" : ""}
+                ${flippedIndex === null ? "hover:scale-105 animate-wiggle" : ""}
+              `}
+              onClick={() => handleCardClick(i)}
             >
-              {/* 背面（未翻開） */}
-              <div className="absolute w-full h-full backface-hidden flex items-center justify-center bg-yellow-300 text-black border-4 border-black shadow-pixel">
-                🎲
-              </div>
+              <div
+                className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d"
+                style={{
+                  transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)",
+                }}
+              >
+                {/* 卡牌背面 */}
+                <div className="absolute w-full h-full backface-hidden flex items-center justify-center bg-yellow-300 text-black border-4 border-black shadow-pixel">
+                  🎲
+                </div>
 
-              {/* 正面（翻開） */}
-              <div className="absolute w-full h-full backface-hidden transform rotateY-180 flex items-center justify-center bg-green-700 border-4 border-black shadow-inner shadow-pixel text-sm p-2">
-                {drawnTask && flippedIndex === i ? (
-                  <div className="text-center space-y-2">
-                    <p>{drawnTask.content}</p>
-                    <p className="text-xs">✏️ by {drawnTask.author}</p>
-                  </div>
-                ) : (
-                  "抽取中..."
-                )}
+                {/* 卡牌正面 */}
+                <div className="absolute w-full h-full backface-hidden transform rotateY-180 flex items-center justify-center bg-green-700 border-4 border-black shadow-inner shadow-pixel text-sm p-2">
+                  {drawnTask && flippedIndex === i ? (
+                    <div className="text-center space-y-2">
+                      <p>{drawnTask.content}</p>
+                      <p className="text-xs">✏️ by {drawnTask.author}</p>
+                    </div>
+                  ) : (
+                    "抽取中..."
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* 再抽一次按鈕 */}
