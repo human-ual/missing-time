@@ -1,6 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 
+// 你可以將這些圖檔放在 public/images/ 目錄下，檔名與清單一致
+const appleImages = [
+  "/images/apple-normal.png",
+  "/images/apple-bitten1.png",
+  "/images/apple-twoleaves.png",
+  "/images/apple-worm.png",
+  "/images/apple-sliced.png",
+  "/images/apple-bitten2.png",
+];
+
 type Task = {
   id: number;
   content: string;
@@ -17,7 +27,6 @@ export default function PixelCardGrid() {
     try {
       const res = await fetch("/api/sample-tasks");
       const data = await res.json();
-      console.log("✅ 載入任務成功", data);
       if (!Array.isArray(data.tasks)) throw new Error("資料格式錯誤");
       setTasks(data.tasks);
       setDrawnTask(null);
@@ -36,48 +45,45 @@ export default function PixelCardGrid() {
     if (flippedIndex !== null || loading) return;
     setFlippedIndex(index);
     setLoading(true);
-    await new Promise((res) => setTimeout(res, 600)); // 模擬延遲動畫
+    await new Promise((res) => setTimeout(res, 600));
     setDrawnTask(tasks[index]);
     setLoading(false);
   };
 
   return (
-    <div className="flex flex-col items-center space-y-6 font-pixel p-4 text-white">
-      <h1 className="text-xl flex items-center gap-2">🎴 選一張卡片抽任務</h1>
+    <div className="bg-black h-screen overflow-hidden flex flex-col items-center justify-center p-4 font-pixel text-white">
+      <h1 className="text-xl mb-6">🎴 選一張卡片抽任務</h1>
 
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-3 gap-4">
         {tasks.map((task, i) => (
           <div
             key={i}
             onClick={() => handleCardClick(i)}
-            className={`w-36 h-52 cursor-pointer transition-all duration-500 perspective-1000 relative 
-              ${flippedIndex !== null && flippedIndex !== i ? "opacity-30 pointer-events-none" : ""}
-              ${flippedIndex === null ? "hover:scale-105 animate-wiggle" : ""}
+            className={`w-36 h-52 cursor-pointer transition-all duration-500 relative border-4 border-white shadow-lg bg-black
+              ${flippedIndex !== null && flippedIndex !== i ? "opacity-30 pointer-events-none" : "hover:scale-105"}
+              ${flippedIndex === i ? "scale-110 z-10" : ""}
             `}
           >
-            <div
-              className="absolute w-full h-full transition-transform duration-700 transform-style-preserve-3d"
-              style={{
-                transform: flippedIndex === i ? "rotateY(180deg)" : "rotateY(0deg)",
-              }}
-            >
-              {/* 卡片背面 */}
-              <div className="absolute w-full h-full backface-hidden flex items-center justify-center bg-yellow-300 text-black border-4 border-black shadow-pixel">
-                🎲
+            {/* 卡片內容 */}
+            {flippedIndex === i ? (
+              <div className="w-full h-full flex flex-col items-center justify-center p-2 text-xs text-center">
+                <img
+                  src={appleImages[i % appleImages.length]}
+                  alt="apple-front"
+                  className="w-12 h-12 mb-2"
+                />
+                <p>{task.content}</p>
+                <p className="text-[10px] mt-1">✏️ by {task.author}</p>
               </div>
-
-              {/* 卡片正面 */}
-              <div className="absolute w-full h-full backface-hidden transform rotateY-180 flex items-center justify-center bg-green-800 text-white text-center border-4 border-black shadow-pixel text-xs p-2">
-                {drawnTask && flippedIndex === i ? (
-                  <div className="space-y-2">
-                    <p>{drawnTask.content}</p>
-                    <p className="text-[10px]">✏️ by {drawnTask.author}</p>
-                  </div>
-                ) : (
-                  "抽取中..."
-                )}
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <img
+                  src={appleImages[i % appleImages.length]}
+                  alt="apple-back"
+                  className="w-12 h-12"
+                />
               </div>
-            </div>
+            )}
           </div>
         ))}
       </div>
@@ -85,7 +91,7 @@ export default function PixelCardGrid() {
       {drawnTask && (
         <button
           onClick={loadRandomTasks}
-          className="mt-6 px-6 py-3 bg-pink-300 text-black border-2 border-white rounded hover:scale-105 transition-transform"
+          className="mt-8 px-6 py-3 bg-pink-300 text-black border-2 border-white rounded hover:scale-105 transition-transform"
         >
           🔁 再抽一次
         </button>
