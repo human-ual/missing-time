@@ -16,6 +16,15 @@ type Task = {
   author: string;
 };
 
+function fillToSix(tasks: Task[]): Task[] {
+  const result: Task[] = [];
+  if (tasks.length === 0) return result;
+  while (result.length < 6) {
+    result.push(tasks[result.length % tasks.length]);
+  }
+  return result;
+}
+
 export default function PixelCardGrid() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [drawnTask, setDrawnTask] = useState<Task | null>(null);
@@ -28,7 +37,8 @@ export default function PixelCardGrid() {
       const res = await fetch("/api/sample-tasks?repeat=" + allowRepeat);
       const data = await res.json();
       if (!Array.isArray(data.tasks)) throw new Error("資料格式錯誤");
-      setTasks(data.tasks);
+      const padded = fillToSix(data.tasks);
+      setTasks(padded);
       setDrawnTask(null);
       setFlippedIndex(null);
     } catch (err) {
@@ -63,14 +73,14 @@ export default function PixelCardGrid() {
         允許重複抽到任務
       </label>
 
-      <div className={`flex gap-4 transition-all duration-700 ${flippedIndex !== null ? "justify-center" : "flex-wrap justify-center"} items-center w-full max-w-screen-lg`}>
+      <div className={`flex gap-4 transition-all duration-700 ${flippedIndex !== null ? "justify-center" : "flex-wrap justify-center"} items-center w-full max-w-screen-xl`}>
         {tasks.map((task, i) => (
           <div
             key={i}
             onClick={() => handleCardClick(i)}
-            className={`transition-all duration-500 relative border-4 border-white bg-black shadow-lg cursor-pointer
+            className={`transition-all duration-500 relative border-4 border-white bg-black shadow-lg cursor-pointer flex items-center justify-center
               ${flippedIndex !== null && flippedIndex !== i ? "opacity-0 w-0 h-0 overflow-hidden" : "hover:scale-105"}
-              ${flippedIndex === i ? "w-[80vw] h-[65vh] scale-100 z-10" : "w-44 h-60"}
+              ${flippedIndex === i ? "w-[60vw] h-[60vh] scale-100 z-10" : "w-44 h-60"}
             `}
           >
             {flippedIndex === i ? (
