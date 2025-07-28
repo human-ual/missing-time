@@ -58,10 +58,16 @@ export default function PixelCardGrid() {
     await new Promise((res) => setTimeout(res, 600));
     setDrawnTask(tasks[index]);
     setLoading(false);
+
+    fetch("/api/mark-drawn", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: tasks[index].id }),
+    }).catch((err) => console.error("⚠️ 無法記錄抽取歷史", err));
   };
 
   return (
-    <div className="bg-black h-screen overflow-hidden flex flex-col items-center justify-center p-4 font-pixel text-white">
+    <div className="bg-black min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start p-4 font-pixel text-white">
       <h1 className="text-xl mb-4">🎴 選一張卡片抽任務</h1>
 
       <label className="text-xs mb-4 flex items-center gap-2">
@@ -73,14 +79,14 @@ export default function PixelCardGrid() {
         允許重複抽到任務
       </label>
 
-      <div className={`flex gap-4 transition-all duration-700 ${flippedIndex !== null ? "justify-center" : "flex-wrap justify-center"} items-center w-full max-w-screen-xl`}>
+      <div className={`flex flex-wrap gap-4 transition-all duration-700 justify-center items-center w-full max-w-screen-xl`}>
         {tasks.map((task, i) => (
           <div
             key={i}
             onClick={() => handleCardClick(i)}
             className={`transition-all duration-500 relative border-4 border-white bg-black shadow-lg cursor-pointer flex items-center justify-center
               ${flippedIndex !== null && flippedIndex !== i ? "opacity-0 w-0 h-0 overflow-hidden" : "hover:scale-105"}
-              ${flippedIndex === i ? "w-[60vw] h-[60vh] scale-100 z-10" : "w-44 h-60"}
+              ${flippedIndex === i ? "fixed inset-0 m-auto w-[90vw] max-w-md h-[80vh] z-10" : "w-40 h-56"}
             `}
           >
             {flippedIndex === i ? (
