@@ -44,7 +44,7 @@ export default function DrawTaskPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 font-['Press_Start_2P']">
-      <h1 className="text-2xl mb-6">🎴 選一張卡片抽任務</h1>
+      
       <PixelCardGrid />
     </div>
   );
