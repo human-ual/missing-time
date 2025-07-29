@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { data, error } = await supabase
       .from("tasks")
-      .select("id, content, author")
+      .select("id, content, author, message")
       .is("drawn_at", null); // ✅ 修改這一行
 
     if (error) {
