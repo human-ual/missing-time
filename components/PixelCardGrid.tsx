@@ -61,12 +61,12 @@ export default function PixelCardGrid() {
     setDrawnTask(tasks[index]);
     setLoading(false);
 
-   /* fetch("/api/mark-drawn_at", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: tasks[index].id }),
-    }).catch((err) => console.error("⚠️ 無法記錄抽取歷史", err));
-  };*/
+   // fetch("/api/mark-drawn_at", {
+    //  method: "POST",
+    //  headers: { "Content-Type": "application/json" },
+    //  body: JSON.stringify({ id: tasks[index].id }),
+    //}).catch((err) => console.error("⚠️ 無法記錄抽取歷史", err));
+  //};
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -79,6 +79,7 @@ export default function PixelCardGrid() {
       .then(({ error }) => {
         if (error) console.error("⚠️ 更新 drawn_at 失敗", error);
       });
+    };
 
   return (
     <div className="bg-black min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start p-4 font-pixel text-white">
