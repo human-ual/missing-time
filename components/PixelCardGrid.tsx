@@ -69,7 +69,7 @@ export default function PixelCardGrid() {
 
   return (
     <div className="bg-black min-h-screen w-full overflow-x-hidden flex flex-col items-center justify-start p-4 font-pixel text-white">
-      {/*<h1 className="text-xl mb-4">🎴 選一張卡片抽任務</h1>*/}
+      <h1 className="text-xl mb-4">🎴 選一張卡片抽任務</h1>
 
       <label className="text-xs mb-4 flex items-center gap-2">
         <input
