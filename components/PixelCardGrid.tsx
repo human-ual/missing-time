@@ -15,6 +15,7 @@ type Task = {
   id: number;
   content: string;
   author: string;
+  message: string;
 };
 
 function fillToSix(tasks: Task[]): Task[] {
@@ -112,6 +113,7 @@ export default function PixelCardGrid() {
                   className="w-20 h-20 mb-4"
                 />
                 <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
+                <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
                 <p className="text-[10px] mt-4">✏️ by {task.author}</p>
               </div>
             ) : (
