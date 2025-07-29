@@ -60,7 +60,7 @@ export default function PixelCardGrid() {
     setDrawnTask(tasks[index]);
     setLoading(false);
 
-    fetch("/api/mark-drawn", {
+    fetch("/api/mark-drawn_a", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tasks[index].id }),
