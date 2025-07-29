@@ -20,7 +20,8 @@ function fillToSix(tasks: Task[]): Task[] {
   const result: Task[] = [];
   if (tasks.length === 0) return result;
   while (result.length < 6) {
-    result.push(tasks[result.length % tasks.length]);
+    const randomIndex = Math.floor(Math.random() * tasks.length);
+    result.push(tasks[randomIndex]);
   }
   return result;
 }
@@ -79,7 +80,7 @@ export default function PixelCardGrid() {
         允許重複抽到任務
       </label>
 
-      <div className={`flex flex-wrap gap-4 transition-all duration-700 justify-center items-center w-full max-w-screen-xl`}>
+      <div className="flex flex-wrap gap-4 justify-center items-center w-full max-w-6xl">
         {tasks.map((task, i) => (
           <div
             key={i}
