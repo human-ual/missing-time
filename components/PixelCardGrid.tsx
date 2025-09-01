@@ -7,8 +7,8 @@ const appleImages = [
   "/images/p.png",
   "/images/f.png",
   "/images/b.png",
-  "/images/apple-sliced.png",
-  "/images/apple-bitten2.png",
+  "/images/h.png",
+  "/images/t.png",
 ];
 
 type Task = {
@@ -106,22 +106,24 @@ export default function PixelCardGrid() {
             `}
           >
         {flippedIndex === i ? (
-          <div className="w-full h-full flex flex-col items-center justify-center p-6 text-sm text-center overflow-y-auto">
+          <div className="w-full h-full flex flex-col items-center justify-center text-sm text-center overflow-y-auto relative">
             <img
               src={appleImages[i % appleImages.length]}
               alt="apple-front"
-              className="w-full h-full object-contain p-4"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
-            <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
-            <p className="text-[10px] mt-4">✏️ by {task.author}</p>
+            <div className="relative z-10 bg-black/60 w-full h-full flex flex-col items-center justify-center p-4">
+              <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
+              <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
+              <p className="text-[10px] mt-4">✏️ by {task.author}</p>
+            </div>
           </div>
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full relative">
             <img
               src={appleImages[i % appleImages.length]}
               alt="apple-back"
-              className="w-full h-full object-contain p-4"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
         )}
