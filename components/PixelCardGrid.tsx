@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const appleImages = [
   "/images/apple.png",
-  "/images/p.png",
+  "/images/d.png",
   "/images/f.png",
   "/images/b.png",
   "/images/h.png",
