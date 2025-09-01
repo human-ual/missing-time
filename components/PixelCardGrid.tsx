@@ -4,9 +4,9 @@ import { createClient } from "@supabase/supabase-js";
 
 const appleImages = [
   "/images/apple.png",
-  "/images/apple-bitten1.png",
-  "/images/apple-twoleaves.png",
-  "/images/apple-worm.png",
+  "/images/p.png",
+  "/images/f.png",
+  "/images/b.png",
   "/images/apple-sliced.png",
   "/images/apple-bitten2.png",
 ];
@@ -110,7 +110,7 @@ export default function PixelCardGrid() {
                 <img
                   src={appleImages[i % appleImages.length]}
                   alt="apple-front"
-                  className="w-20 h-20 mb-4"
+                  className="w-16 h-16 md:w-20 md:h-20 mb-4"
                 />
                 <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
                 <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
@@ -121,7 +121,7 @@ export default function PixelCardGrid() {
                 <img
                   src={appleImages[i % appleImages.length]}
                   alt="apple-back"
-                  className="w-12 h-12"
+                  className="w-16 h-16 md:w-20 md:h-20"
                 />
               </div>
             )}
