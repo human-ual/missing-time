@@ -109,8 +109,8 @@ export default function PixelCardGrid() {
               <div className="w-full h-full flex flex-col items-center justify-center p-6 text-sm text-center overflow-y-auto">
                 <img
                   src={appleImages[i % appleImages.length]}
-                  alt="apple-front"
-                  className="w-16 h-16 md:w-20 md:h-20 mb-4"
+                  alt={flippedIndex === i ? "apple-front" : "apple-back"}
+                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain"
                 />
                 <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
                 <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
@@ -118,11 +118,11 @@ export default function PixelCardGrid() {
               </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <img
-                  src={appleImages[i % appleImages.length]}
-                  alt="apple-back"
-                  className="w-16 h-16 md:w-20 md:h-20"
-                />
+            <img
+              src={appleImages[i % appleImages.length]}
+              alt={flippedIndex === i ? "apple-front" : "apple-back"}
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain"
+            />
               </div>
             )}
           </div>
