@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const appleImages = [
-  "/images/apple-normal.png",
+  "/images/apple.png",
   "/images/apple-bitten1.png",
   "/images/apple-twoleaves.png",
   "/images/apple-worm.png",
