@@ -105,26 +105,26 @@ export default function PixelCardGrid() {
               ${flippedIndex === i ? "fixed inset-0 m-auto w-[90vw] max-w-md h-[80vh] z-10" : "w-40 h-56"}
             `}
           >
-            {flippedIndex === i ? (
-              <div className="w-full h-full flex flex-col items-center justify-center p-6 text-sm text-center overflow-y-auto">
-                <img
-                  src={appleImages[i % appleImages.length]}
-                  alt={flippedIndex === i ? "apple-front" : "apple-back"}
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain"
-                />
-                <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
-                <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
-                <p className="text-[10px] mt-4">✏️ by {task.author}</p>
-              </div>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
+        {flippedIndex === i ? (
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 text-sm text-center overflow-y-auto">
             <img
               src={appleImages[i % appleImages.length]}
-              alt={flippedIndex === i ? "apple-front" : "apple-back"}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain"
+              alt="apple-front"
+              className="w-full h-full object-contain p-4"
             />
-              </div>
-            )}
+            <p className="text-base leading-relaxed whitespace-pre-wrap">{task.content}</p>
+            <p className="text-base leading-relaxed whitespace-pre-wrap">{task.message}</p>
+            <p className="text-[10px] mt-4">✏️ by {task.author}</p>
+          </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <img
+              src={appleImages[i % appleImages.length]}
+              alt="apple-back"
+              className="w-full h-full object-contain p-4"
+            />
+          </div>
+        )}
           </div>
         ))}
       </div>
